@@ -1,0 +1,502 @@
+:root{
+  --bg0:#fff7fb;
+  --bg1:#f6f0ff;
+  --bg2:#edf7ff;
+  --ink:#2a2433;
+  --muted:#6a5f7a;
+  --card:rgba(255,255,255,.72);
+  --card2:rgba(255,255,255,.58);
+  --stroke:rgba(42,36,51,.12);
+  --shadow: 0 22px 60px rgba(42,36,51,.12);
+  --shadow2: 0 12px 30px rgba(42,36,51,.10);
+  --pink:#ff5ea8;
+  --rose:#ff7db8;
+  --lav:#b38cff;
+  --sky:#7cc7ff;
+  --mint:#7de7c8;
+  --gold:#ffd36b;
+  --radius: 22px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(255,125,184,.32), transparent 65%),
+    radial-gradient(800px 520px at 90% 20%, rgba(179,140,255,.30), transparent 60%),
+    radial-gradient(820px 560px at 35% 95%, rgba(124,199,255,.25), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1) 55%, var(--bg2));
+  overflow-x:hidden;
+}
+
+a{ color:inherit; text-decoration:none; }
+
+/* layout helpers */
+.shell{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.frame{
+  width:min(440px, 100%);
+  border:1px solid var(--stroke);
+  border-radius:calc(var(--radius) + 8px);
+  background:linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.55));
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  position:relative;
+}
+.frameInner{
+  padding:18px 16px 16px;
+}
+.topGlow{
+  position:absolute;
+  inset:-120px -120px auto -120px;
+  height:220px;
+  background:radial-gradient(circle at 40% 60%, rgba(255,125,184,.45), transparent 65%);
+  filter: blur(20px);
+  pointer-events:none;
+}
+.bottomGlow{
+  position:absolute;
+  inset:auto -120px -160px -120px;
+  height:260px;
+  background:radial-gradient(circle at 60% 40%, rgba(179,140,255,.38), transparent 65%);
+  filter: blur(20px);
+  pointer-events:none;
+}
+
+/* typographic */
+.title{
+  font-weight:800;
+  letter-spacing:-.02em;
+  font-size: 20px;
+  line-height:1.25;
+}
+.subtitle{
+  font-size: 13px;
+  color: var(--muted);
+  line-height:1.45;
+}
+
+/* buttons */
+.btnRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.btn{
+  appearance:none;
+  border:1px solid rgba(42,36,51,.14);
+  background:rgba(255,255,255,.72);
+  color:var(--ink);
+  border-radius: 999px;
+  padding: 12px 14px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: var(--shadow2);
+  cursor:pointer;
+  transition: transform .15s ease, filter .15s ease, background .15s ease;
+  user-select:none;
+}
+.btn:active{ transform: scale(.98); }
+.btnPrimary{
+  border-color: rgba(255,94,168,.28);
+  background: linear-gradient(135deg, rgba(255,94,168,.95), rgba(179,140,255,.92));
+  color: white;
+}
+.btnGhost{
+  background: rgba(255,255,255,.55);
+}
+.btnWide{ width:100%; justify-content:center; }
+
+/* chips */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding: 7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(42,36,51,.12);
+  background: rgba(255,255,255,.6);
+  color: var(--muted);
+  font-weight: 650;
+  font-size: 12px;
+}
+
+/* chat */
+.chat{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding: 6px 2px 8px;
+}
+.bubble{
+  max-width: 86%;
+  padding: 11px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(42,36,51,.10);
+  background: rgba(255,255,255,.66);
+  box-shadow: 0 10px 22px rgba(42,36,51,.08);
+  font-size: 14px;
+  line-height: 1.35;
+}
+.bubbleMe{
+  align-self:flex-end;
+  border-color: rgba(255,94,168,.22);
+  background: linear-gradient(135deg, rgba(255,94,168,.95), rgba(179,140,255,.78));
+  color:white;
+}
+.bubbleHint{
+  font-size: 12px;
+  color: rgba(255,255,255,.88);
+  opacity:.95;
+}
+
+/* envelope */
+.envelopeWrap{
+  display:flex;
+  justify-content:center;
+  margin-top: 14px;
+}
+.envelope{
+  width: 270px;
+  height: 180px;
+  position:relative;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.6));
+  border: 1px solid rgba(42,36,51,.12);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.envBody{
+  position:absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,125,184,.23), rgba(124,199,255,.18));
+}
+.envFlap{
+  position:absolute;
+  left:0; right:0;
+  top:0;
+  height: 52%;
+  transform-origin: top center;
+  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.55));
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-bottom: 1px solid rgba(42,36,51,.10);
+}
+.envBottom{
+  position:absolute;
+  left:0; right:0;
+  bottom:-2px;
+  height: 58%;
+  background: linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,.72));
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  border-top: 1px solid rgba(42,36,51,.08);
+}
+.letter{
+  position:absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  height: 78%;
+  border-radius: 14px;
+  border: 1px solid rgba(42,36,51,.10);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.70));
+  box-shadow: 0 12px 24px rgba(42,36,51,.10);
+  padding: 12px;
+}
+.letterLines{
+  height:100%;
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255,94,168,.08), transparent 45%),
+    repeating-linear-gradient(180deg, rgba(42,36,51,.08), rgba(42,36,51,.08) 1px, transparent 1px, transparent 10px);
+  opacity:.95;
+}
+
+/* cake */
+.cakeWrap{
+  margin-top: 14px;
+  display:flex;
+  justify-content:center;
+}
+.cakeStage{
+  width: 320px;
+  max-width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 28px;
+  border: 1px solid rgba(42,36,51,.12);
+  background:
+    radial-gradient(240px 180px at 30% 20%, rgba(255,125,184,.26), transparent 62%),
+    radial-gradient(260px 190px at 78% 70%, rgba(179,140,255,.22), transparent 62%),
+    radial-gradient(280px 200px at 40% 92%, rgba(124,199,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.52));
+  box-shadow: var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.cakeArt{
+  position:absolute;
+  inset: 0;
+  pointer-events:none;
+}
+.cakePlate{
+  position:absolute;
+  left: 36px;
+  right: 36px;
+  bottom: 12%;
+  height: 13%;
+  border-radius: 999px;
+  background:
+    radial-gradient(140px 50px at 50% 30%, rgba(255,255,255,.95), rgba(255,255,255,.55)),
+    linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.78));
+  border: 1px solid rgba(42,36,51,.10);
+  box-shadow: 0 18px 36px rgba(42,36,51,.10);
+}
+.cakeBase{
+  position:absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: 78%;
+  height: 58%;
+  border-radius: 999px;
+  filter: drop-shadow(0 26px 46px rgba(42,36,51,.16));
+}
+.cakeSide{
+  position:absolute;
+  inset: 12% 0 0 0;
+  border-radius: 999px;
+  background:
+    radial-gradient(240px 140px at 30% 10%, rgba(255,255,255,.60), transparent 55%),
+    radial-gradient(260px 170px at 70% 75%, rgba(179,140,255,.18), transparent 62%),
+    linear-gradient(180deg, rgba(255,232,214,.98), rgba(255,214,190,.92));
+  border: 1px solid rgba(42,36,51,.14);
+  overflow:hidden;
+}
+.cakeSide::after{
+  content:"";
+  position:absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(170,120,90,.10) 0px,
+      rgba(170,120,90,.10) 2px,
+      transparent 2px,
+      transparent 18px
+    );
+  opacity:.65;
+}
+.cakeTop{
+  position:absolute;
+  left: 6%;
+  right: 6%;
+  top: 2%;
+  height: 38%;
+  border-radius: 999px;
+  background:
+    radial-gradient(140px 90px at 30% 35%, rgba(255,255,255,.70), transparent 60%),
+    linear-gradient(135deg, rgba(255,94,168,.86), rgba(179,140,255,.70));
+  border: 1px solid rgba(255,94,168,.25);
+  box-shadow: 0 16px 34px rgba(255,94,168,.18);
+  filter: saturate(1.05);
+}
+.cakeDrip{
+  position:absolute;
+  left: 10%;
+  right: 10%;
+  top: 22%;
+  height: 38%;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255,94,168,.22) 0 12px, transparent 13px),
+    radial-gradient(circle at 34% 0%, rgba(179,140,255,.20) 0 14px, transparent 15px),
+    radial-gradient(circle at 52% 0%, rgba(255,94,168,.22) 0 11px, transparent 12px),
+    radial-gradient(circle at 70% 0%, rgba(179,140,255,.20) 0 16px, transparent 17px),
+    radial-gradient(circle at 86% 0%, rgba(255,94,168,.22) 0 12px, transparent 13px),
+    linear-gradient(180deg, rgba(255,255,255,.0), rgba(255,255,255,.0));
+  opacity:.95;
+  mask-image: linear-gradient(180deg, black 55%, transparent 100%);
+}
+.cakeDeco{
+  position:absolute;
+  left: 14%;
+  right: 14%;
+  top: 10%;
+  height: 22%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.rosette{
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 35% 35%, rgba(255,255,255,.75), transparent 55%),
+    linear-gradient(135deg, rgba(255,211,107,.92), rgba(255,94,168,.70));
+  border: 1px solid rgba(42,36,51,.12);
+  box-shadow: 0 10px 18px rgba(255,94,168,.14);
+}
+.candles{
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 17%;
+  display:flex;
+  justify-content:center;
+  gap: 14px;
+  pointer-events:none;
+}
+.candle{
+  width: 10px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.65));
+  border: 1px solid rgba(42,36,51,.12);
+  box-shadow: 0 10px 22px rgba(42,36,51,.10);
+  position:relative;
+  overflow:hidden;
+}
+.candleTall{ height: 38px; }
+.candle::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,94,168,.55) 0px,
+      rgba(255,94,168,.55) 3px,
+      transparent 3px,
+      transparent 7px
+    );
+  opacity:.55;
+}
+.flame{
+  position:absolute;
+  left: 50%;
+  top: -12px;
+  width: 12px;
+  height: 16px;
+  transform: translateX(-50%) rotate(6deg);
+  border-radius: 999px 999px 999px 999px / 120% 120% 80% 80%;
+  background: radial-gradient(circle at 50% 35%, rgba(255,255,255,.95), rgba(255,211,107,.95) 55%, rgba(255,94,168,.35));
+  box-shadow: 0 10px 18px rgba(255,211,107,.22);
+  animation: flicker 1.25s ease-in-out infinite;
+}
+@keyframes flicker{
+  0%{ transform: translateX(-50%) rotate(4deg) scale(1); opacity:.95; }
+  50%{ transform: translateX(-50%) rotate(-6deg) scale(1.05); opacity:1; }
+  100%{ transform: translateX(-50%) rotate(5deg) scale(1); opacity:.95; }
+}
+.sprinkles{
+  position:absolute;
+  left: 18%;
+  right: 18%;
+  top: 8%;
+  height: 58px;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 10% 40%, rgba(255,211,107,.95) 2px, transparent 3px),
+    radial-gradient(circle at 24% 70%, rgba(125,231,200,.95) 2px, transparent 3px),
+    radial-gradient(circle at 40% 35%, rgba(124,199,255,.95) 2px, transparent 3px),
+    radial-gradient(circle at 55% 60%, rgba(255,255,255,.95) 2px, transparent 3px),
+    radial-gradient(circle at 68% 32%, rgba(255,211,107,.95) 2px, transparent 3px),
+    radial-gradient(circle at 82% 62%, rgba(255,125,184,.95) 2px, transparent 3px);
+  opacity:.9;
+}
+.cakeCanvas{
+  position:absolute;
+  inset: 0;
+  width:100%;
+  height:100%;
+  touch-action:none;
+}
+.cakeHint{
+  position:absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  display:flex;
+  justify-content:center;
+}
+
+/* cards */
+.cardGrid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:12px;
+  margin-top: 14px;
+}
+.flipCard{
+  width:100%;
+  min-height: 120px;
+  border-radius: 18px;
+  border: 1px solid rgba(42,36,51,.12);
+  background: rgba(255,255,255,.66);
+  box-shadow: var(--shadow2);
+  position:relative;
+  perspective: 1200px;
+  overflow:hidden;
+}
+.flipInner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style: preserve-3d;
+}
+.flipFace{
+  position:absolute;
+  inset:0;
+  padding: 14px;
+  backface-visibility: hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:8px;
+}
+.flipBack{
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, rgba(255,94,168,.18), rgba(179,140,255,.14));
+}
+.flipFrontTitle{
+  font-weight: 850;
+  font-size: 16px;
+}
+.flipSmall{
+  font-size: 13px;
+  color: var(--muted);
+  line-height:1.4;
+}
+
+/* final letter */
+.letterPaper{
+  margin-top: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(42,36,51,.12);
+  background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.62));
+  box-shadow: var(--shadow);
+  padding: 14px 14px 12px;
+}
+.letterText{
+  font-size: 14px;
+  line-height: 1.62;
+  color: rgba(42,36,51,.92);
+  white-space: pre-wrap;
+}
+.sig{
+  margin-top: 12px;
+  font-weight: 850;
+}
+
+/* tiny sparkles */
+.sparkleLayer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+
